@@ -9,11 +9,11 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+// });
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -36,7 +36,7 @@ app.post("/send", function (req, res) {
     subject: `${data.subject}`,
     html:
       `
-        <div style='color:red; background-color:black'>
+        <div style='color:red; background-color:black; padding:20px'>
           <p> Message : ${data.message} </p>
         </div>
         `
@@ -47,16 +47,16 @@ app.post("/send", function (req, res) {
       console.log("Error " + err);
     } else {
       console.log("Email sent successfully");
-      console.log(res.status)
+      // console.log(res.status)
     }
   });
 });
 
 
-// const port = process.env.PORT || 4000;
-// app.listen(port, () => {
-//  console.log(`Server is running on port: ${port}`);
-// });
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+ console.log(`Server is running on port: ${port}`);
+});
 
 
 
