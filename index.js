@@ -1,10 +1,13 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
+const bodyParser = require('body-parser');
 const cors = require('cors')
 require("dotenv").config();
 
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -20,10 +23,17 @@ let transporter = nodemailer.createTransport({
 
 
 app.post("/send", function (req, res) {
+    const data = req.body
     let mailOptions = {
         from: 'ambrewster24@gmail.com',
-        to:'ujjwalcpj@gmail.com',
-        subject: 'test 3 email',
+        to: `${data.email}`,
+        subject: `${data.subject}`,
+        html:
+        `
+        <div style='color:red; background-color:black'>
+          <p> Message : ${data.message} </p>
+        </div>
+        `
     }
     
     transporter.sendMail(mailOptions, function (err, data) {
@@ -31,10 +41,10 @@ app.post("/send", function (req, res) {
        console.log("Error " + err);
      } else {
        console.log("Email sent successfully");
+       console.log(res.status)
      }
     });
 });
-
 
 
 const port = process.env.PORT || 4000;
