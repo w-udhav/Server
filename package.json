@@ -4,6 +4,7 @@
   "description": "",
   "main": "Mail.js",
   "scripts": {
+    "start": "node Mail.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

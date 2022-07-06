@@ -23,7 +23,7 @@ app.post("/send", function (req, res) {
     let mailOptions = {
         from: 'ambrewster24@gmail.com',
         to:'ujjwalcpj@gmail.com',
-        subject: 'test 2 email',
+        subject: 'test 3 email',
     }
     
     transporter.sendMail(mailOptions, function (err, data) {
