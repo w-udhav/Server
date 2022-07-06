@@ -2,7 +2,8 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const { request } = require("express");
 require("dotenv").config();
 
 app.use(cors())
@@ -57,6 +58,8 @@ app.post("/send", function (req, res) {
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
  console.log(`Server is running on port: ${port}`);
+ request.setHeader('Access-Control-Request-Headers','*');
+ request.setHeader('Access-Control-Allow-Origin','https://localhost:3000')
 });
 
 
