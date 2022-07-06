@@ -9,41 +9,47 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      type: "OAuth2",
-      user: "ambrewster24@gmail.com",
-      pass: "",
-      clientId: "826262925552-1148ei1vit8ct556565pn8kgtfaesbmb.apps.googleusercontent.com",
-      clientSecret: "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",
-      refreshToken: "1//049TDRiGtrTlnCgYIARAAGAQSNgF-L9IrlulrUP-Y5ca1bptyPCIerUx1J67Og12_HklnfPvHPPP_bBYWNIlo8dkQQqRO4znzfw",
-    },
-   });
+  service: "gmail",
+  auth: {
+    type: "OAuth2",
+    user: "ambrewster24@gmail.com",
+    pass: "",
+    clientId: "826262925552-1148ei1vit8ct556565pn8kgtfaesbmb.apps.googleusercontent.com",
+    clientSecret: "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",
+    refreshToken: "1//049TDRiGtrTlnCgYIARAAGAQSNgF-L9IrlulrUP-Y5ca1bptyPCIerUx1J67Og12_HklnfPvHPPP_bBYWNIlo8dkQQqRO4znzfw",
+  },
+});
 
 
 app.post("/send", function (req, res) {
-    const data = req.body
-    let mailOptions = {
-        from: 'ambrewster24@gmail.com',
-        to: `${data.email}`,
-        subject: `${data.subject}`,
-        html:
-        `
+  const data = req.body
+  let mailOptions = {
+    from: 'ambrewster24@gmail.com',
+    to: `${data.email}`,
+    subject: `${data.subject}`,
+    html:
+      `
         <div style='color:red; background-color:black'>
           <p> Message : ${data.message} </p>
         </div>
         `
+  }
+
+  transporter.sendMail(mailOptions, function (err, data) {
+    if (err) {
+      console.log("Error " + err);
+    } else {
+      console.log("Email sent successfully");
+      console.log(res.status)
     }
-    
-    transporter.sendMail(mailOptions, function (err, data) {
-     if (err) {
-       console.log("Error " + err);
-     } else {
-       console.log("Email sent successfully");
-       console.log(res.status)
-     }
-    });
+  });
 });
 
 
