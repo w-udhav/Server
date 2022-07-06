@@ -2,9 +2,9 @@
   "name": "npm",
   "version": "1.0.0",
   "description": "",
-  "main": "Mail.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node Mail.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,5 +16,8 @@
     "express": "^4.18.1",
     "nodemailer": "^6.7.6",
     "nodemon": "^2.0.18"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
