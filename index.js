@@ -3,19 +3,19 @@ const nodemailer = require("nodemailer");
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { request } = require("express");
+const { request, response } = require("express");
 require("dotenv").config();
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Headers", "*");
-  res.header('Access-Control-Allow-Methods','POST');
-  res.header('Access-Control-Allow-Origin','https://localhost:3000')
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Headers", "*");
+//   res.header('Access-Control-Allow-Methods', 'POST');
+//   res.header('Access-Control-Allow-Origin', 'https://localhost:3000')
+//   next();
+// });
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -57,9 +57,7 @@ app.post("/send", function (req, res) {
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
- console.log(`Server is running on port: ${port}`);
- request.setHeader('Access-Control-Request-Headers','*');
- request.setHeader('Access-Control-Allow-Origin','https://localhost:3000')
+  console.log(`Server is running on port: ${port}`);
 });
 
 
