@@ -3,7 +3,6 @@ const nodemailer = require("nodemailer");
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { request, response } = require("express");
 require("dotenv").config();
 
 app.use(cors())
@@ -32,6 +31,7 @@ let transporter = nodemailer.createTransport({
 
 app.post("/send", function (req, res) {
   const data = req.body
+  console.log(data)
   let mailOptions = {
     from: 'ambrewster24@gmail.com',
     to: `${data.email}`,
@@ -46,7 +46,7 @@ app.post("/send", function (req, res) {
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      console.log("Error " + err);
+      console.log("Error" + err);
     } else {
       console.log("Email sent successfully");
       // console.log(res.status)
