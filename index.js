@@ -24,7 +24,7 @@ let transporter = nodemailer.createTransport({
     pass: "",
     clientId: "1014401360433-kl2joalk5lomdsohpq8kva26tg8ke8qb.apps.googleusercontent.com",
     clientSecret: "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",
-    refreshToken: "1//0454nWArMIPOdCgYIARAAGAQSNwF-L9Ir1zAp7yL2EOnV3o9R9HdfnymczrudNu8yXnwaYos6VEM-Asd8aLdOEdh1p2NGIIRxuzk",
+    refreshToken: "1//04j53BH23llcNCgYIARAAGAQSNwF-L9IrYVENbH2tID_UvOh1UQFClIuQW6X7m23yasUfxXtIj4_8bNi2irXtD_8gAz5Wfh-vflA",
   },
 });
 
