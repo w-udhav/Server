@@ -9,13 +9,6 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Headers", "*");
-//   res.header('Access-Control-Allow-Methods', 'POST');
-//   res.header('Access-Control-Allow-Origin', 'https://localhost:3000')
-//   next();
-// });
-
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
