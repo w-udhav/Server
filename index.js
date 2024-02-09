@@ -1,11 +1,11 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config();
 
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -15,22 +15,21 @@ let transporter = nodemailer.createTransport({
     type: "OAuth2",
     user: "highhopestutoring.canningvale@gmail.com",
     pass: "",
-    clientId: "1014401360433-kl2joalk5lomdsohpq8kva26tg8ke8qb.apps.googleusercontent.com",
+    clientId:
+      "1014401360433-kl2joalk5lomdsohpq8kva26tg8ke8qb.apps.googleusercontent.com",
     clientSecret: "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",
-    refreshToken: "1//04j53BH23llcNCgYIARAAGAQSNwF-L9IrYVENbH2tID_UvOh1UQFClIuQW6X7m23yasUfxXtIj4_8bNi2irXtD_8gAz5Wfh-vflA",
+    refreshToken:
+      "1//04j53BH23llcNCgYIARAAGAQSNwF-L9IrYVENbH2tID_UvOh1UQFClIuQW6X7m23yasUfxXtIj4_8bNi2irXtD_8gAz5Wfh-vflA",
   },
 });
 
-
 app.post("/send", function (req, res) {
-  const data = req.body
-  console.log(data)
+  const data = req.body;
   let mailOptions = {
-    from: 'highhopestutoring.canningvale@gmail.com',
+    from: "highhopestutoring.canningvale@gmail.com",
     to: `highhopestutoring.canningvale@gmail.com`,
     subject: `Assessment Form`,
-    html:
-      `
+    html: `
       <div style='font-family:arial'>
       <h1> Assessment &nbsp; Form </h1>
 
@@ -40,11 +39,14 @@ app.post("/send", function (req, res) {
               <tr>
                   <th> Name:: </th>
                   <td> ${data.name} </td>
-                  
               </tr>
               <tr>
                   <th> Email:: </th>
                   <td> ${data.email} </td>
+              </tr>
+              <tr>
+                  <th> Phone:: </th>
+                  <td> ${data.phone} </td>
               </tr>
               <tr>
                   <th> Subject:: </th>
@@ -57,15 +59,15 @@ app.post("/send", function (req, res) {
           </table>
       </div>
   </div>
-      `
-  }
+      `,
+  };
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      return res.json({error: err});
+      return res.json({ error: err });
     } else {
       return res.json({
-        message: "Sent successfully!"
+        message: "Sent successfully!",
       });
     }
   });
@@ -73,14 +75,13 @@ app.post("/send", function (req, res) {
 
 // Enrollment Form
 app.post("/sendform", function (req, res) {
-  const data = req.body
-  console.log(data)
+  const data = req.body;
+  console.log(data);
   let mailOptions = {
-    from: 'highhopestutoring.canningvale@gmail.com',
+    from: "highhopestutoring.canningvale@gmail.com",
     to: `highhopestutoring.canningvale@gmail.com`,
     subject: `Enrolment Form`,
-    html:
-      `
+    html: `
       <div style='font-family:arial'>
         <h1> Assessment Form </h1>
 
@@ -184,8 +185,8 @@ app.post("/sendform", function (req, res) {
         
           <h4 style='margin-top:70px; color:royalblue;'> Signature : <span style='color:black'> ${data.sign} </span> </h4>
       </div>
-      `
-  }
+      `,
+  };
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
@@ -197,63 +198,7 @@ app.post("/sendform", function (req, res) {
   });
 });
 
-
-
-
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
-
-
-
-
-
-// const express = require('express')
-// const app = express()
-
-// require('dotenv').config()
-
-// const bodyParser = require('body-parser')
-// const cors = require('cors')
-// const nodemailer = require('nodemailer')
-
-// app.use(bodyParser.urlencoded({extended: true}))
-// app.use(bodyParser.json())
-
-// app.use(cors())
-
-// app.post('/send_mail', cors(), async(req, res) => {
-//     console.log("Hello")
-//     let { user } = req.body
-
-    // const transport = nodemailer.createTransport({
-    //     host: 'smtp.mailtrap.io',
-    //     port: 465,
-    //     secure: false,
-    //     auth: {
-    //         user: 'ce543c72972be0',
-    //         pass: '92632596f74339'
-    //     },
-    //     tls: {
-    //         ciphers:'SSLv3'
-    //     }
-    // })
-//     console.log(res.respMsg)
-
-    // await transport.sendMail({
-    //     from: 'ambrewster24@gmail.com',
-    //     to:'test@test.com',
-    //     subject: 'test email',
-    //     html: `
-    //         <div>
-    //             <p> hello </p>
-    //         </div>`
-    // })
-
-// })
-
-
-// var listener = app.listen(4000, () => {
-//     console.log(`Server is listening on port ${listener.address().port}`)
-// })
